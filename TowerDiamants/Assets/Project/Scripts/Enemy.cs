@@ -8,9 +8,10 @@ public class Enemy : MonoBehaviour {
 
 	//Enemy Stats
 	[HideInInspector]
-	public int hitPoints;
-	public int startHitPoints = 1;
+	public float hitPoints;
+	public float startHitPoints = 1.0f;
 	public int speed = 5;
+	public int energyBonus = 5;
 
 	private Transform target;
 	private int wavepointIndex = 0;
@@ -41,7 +42,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 
-	public void SubHitPoints (int amount) {
+	public void SubHitPoints (float amount) {
 		hitPoints -= amount;
 		if (hitPoints <= 0) {
 			Die ();
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour {
 
 
 	void Die () {
-		PlayerStats.AddEnergy (10);
+		PlayerStats.AddEnergy (energyBonus);
 		Destroy (gameObject);
 	}
 

@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour {
 
 	public float speed = 20f;
 
+	public float explosionRadius = 0f;
+
 	public int damage = 1;
 
 	public GameObject impactEffekt;
@@ -40,6 +42,7 @@ public class Projectile : MonoBehaviour {
 		}
 
 		transform.Translate (dir.normalized * distanceThisFrame, Space.World);
+		transform.LookAt (target);
 
 	}
 
@@ -50,10 +53,46 @@ public class Projectile : MonoBehaviour {
 
 		Destroy (effectIns, 2f);
 
-		target.GetComponent<Enemy> ().SubHitPoints (damage);
+		if (explosionRadius > 0f) {
+		
+			Explode ();
+		
+		} else {
+
+			Damage (target);
+
+		}
 
 		Destroy (gameObject);
 
+	}
+
+	void Explode () {
+	
+		Collider[] colliders = Physics.OverlapSphere (transform.position, explosionRadius);
+
+		foreach (Collider collider in colliders) {
+
+			if (collider.tag == "Enemy") {
+				Damage (collider.transform);
+			}
+			
+		}
+	
+	}
+
+	void Damage (Transform enemy) {
+
+		enemy.GetComponent<Enemy> ().SubHitPoints (damage);
+
+	}
+
+
+	void OnDrawGizmosSelected () {
+	
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere (transform.position, explosionRadius);
+	
 	}
 
 }

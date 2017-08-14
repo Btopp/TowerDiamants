@@ -9,4 +9,5 @@ using UnityEngine.UI;
 public class TowerBlueprint {
 	public GameObject prefab;
 	public int cost;
+	public Text costText;
 }

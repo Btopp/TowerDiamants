@@ -7,18 +7,27 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
-	public string enemyTag = "Enemy";
-
-	private Transform target;
-
+	[Header ("General")]
 	public float range = 8f;
+
+	[Header ("Use Projectiles")]
+	public GameObject projectilePrefab;
 	public float fireRate = 1f;
 	private float fireCountdown = 0f;
+
+	[Header ("Use Laser")]
+	public bool useLaser = false;
+	public LineRenderer lineRenderer;
+	public float damaOverTime = 1.0f;
+
+
+	public string enemyTag = "Enemy";
+	private Transform target;
+	private Enemy targetEnemy;
 
 	public Transform partToRotate;
 	public float turnSpeed = 10f;
 
-	public GameObject projectilePrefab;
 	public Transform firePoint;
 
 
@@ -48,6 +57,7 @@ public class Tower : MonoBehaviour {
 		if (nearestEnemy != null && shortestDistance <= range) {
 
 			target = nearestEnemy.transform;
+			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
 
 		} else {
 
@@ -74,26 +84,68 @@ public class Tower : MonoBehaviour {
 	void Update () {
 
 		if (target == null) {
+
+			if (useLaser) {
+			
+				if (lineRenderer.enabled) {
+				
+					lineRenderer.enabled = false;
+				
+				}
+			
+			}
+
 			return;
 		}
 
+		LockOnTarget ();
+
+		if (useLaser) {
+		
+			Laser ();
+		
+		} else {
+		
+			if (fireCountdown <= 0f) {
+
+				Shoot ();
+				fireCountdown = 1f / fireRate;
+
+			}
+
+			fireCountdown -= Time.deltaTime;
+		
+		}
+			
+	}
+
+
+	void LockOnTarget () {
+	
 		Vector3 dir = target.position - transform.position;
 		Quaternion lookRotation = Quaternion.LookRotation (dir);
 		Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 		partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);
 
-		if (fireCountdown <= 0f) {
-
-			Shoot ();
-			fireCountdown = 1f / fireRate;
-
-		}
-
-		fireCountdown -= Time.deltaTime;
 	}
 
 
-	void OnDrawGizmosSelected(){
+	void Laser () {
+
+		targetEnemy.SubHitPoints (damaOverTime * Time.deltaTime);
+
+		if (!lineRenderer.enabled) {
+		
+			lineRenderer.enabled = true;
+		
+		}
+	
+		lineRenderer.SetPosition (0, firePoint.position);
+		lineRenderer.SetPosition (1, target.position);
+	
+	}
+
+	void OnDrawGizmosSelected () {
 
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);

@@ -13,8 +13,10 @@ public class TowerShop : MonoBehaviour {
 	public TowerBlueprint hexaTower;
 	public TowerBlueprint circTower;
 
-
 	void Start () {
+		squareTower.costText.text = squareTower.cost.ToString ();
+		hexaTower.costText.text = hexaTower.cost.ToString ();
+		circTower.costText.text = circTower.cost.ToString ();
 		buildManager = BuildManager.instance;
 	}
 
