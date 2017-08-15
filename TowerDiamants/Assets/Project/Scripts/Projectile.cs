@@ -1,25 +1,19 @@
-﻿using UnityEngine;
-
-//by Niklas Bachmann
+﻿//by Niklas Bachmann
 //10.08.2017
+
+using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
 	private Transform target;
-
 	public float speed = 20f;
-
 	public float explosionRadius = 0f;
-
 	public int damage = 1;
-
 	public GameObject impactEffekt;
 
 
 	public void Seek (Transform _target) {
-
 		target = _target;
-
 	}
 		
 

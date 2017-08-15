@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿//by Niklas Bachmann
+//10.08.2017
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-//by Niklas Bachmann
-//10.08.2017
 
 public class Tower : MonoBehaviour {
 
@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour {
 	[Header ("Use Laser")]
 	public bool useLaser = false;
 	public LineRenderer lineRenderer;
-	public float damaOverTime = 1.0f;
+	public float damagePerSec = 1.0f;
 
 
 	public string enemyTag = "Enemy";
@@ -132,7 +132,7 @@ public class Tower : MonoBehaviour {
 
 	void Laser () {
 
-		targetEnemy.SubHitPoints (damaOverTime * Time.deltaTime);
+		targetEnemy.SubHitPoints (damagePerSec * Time.deltaTime);
 
 		if (!lineRenderer.enabled) {
 		

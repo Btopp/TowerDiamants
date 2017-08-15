@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-//by Niklas Bachmann
+﻿//by Niklas Bachmann
 //10.08.2017
+
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
@@ -10,14 +10,17 @@ public class Enemy : MonoBehaviour {
 	[HideInInspector]
 	public float hitPoints;
 	public float startHitPoints = 1.0f;
-	public int speed = 5;
-	public int energyBonus = 5;
+	[HideInInspector]
+	public float speed;
+	public float startSpeed = 5.0f;
+	public int energyBonus = 15;
 
 	private Transform target;
 	private int wavepointIndex = 0;
 
 
 	void Start () {
+		hitPoints = startHitPoints;
 		target = Waypoints.targets [0];
 		hitPoints = startHitPoints;
 	}

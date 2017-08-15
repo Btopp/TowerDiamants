@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.EventSystems;
-
-//by Niklas Bachmann
+﻿//by Niklas Bachmann
 //10.08.2017
+
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Socket : MonoBehaviour {
 
