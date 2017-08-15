@@ -12,8 +12,12 @@ public class BuildManager : MonoBehaviour {
 	public GameObject circTowerPrefab;
 
 	private TowerBlueprint towerToBuild;
+	[HideInInspector]
+	public Socket socketToBuildOn;
 
-	public bool CanBuild { get { return towerToBuild != null; } }
+	//vorlaufig muss in UI-scipt
+	public Transform towerShop;
+	public Transform towerDetails;
 
 
 	void Awake () {
@@ -28,14 +32,28 @@ public class BuildManager : MonoBehaviour {
 		towerToBuild = tower;
 	}
 
+	public void SelectSocketToBuildOn (Socket socket) {
+		socketToBuildOn = socket;
+	}
 
-	public void BuildTowerOn (Socket socket) {
+
+	public void BuildTower () {
+
+		if (socketToBuildOn.gotTower) {
+			Debug.Log ("Socket blocked");
+			return;
+		}
+
 		if (PlayerStats.energy < towerToBuild.cost) {
 			Debug.Log ("Not enough energy");
 			return;
 		}
 		PlayerStats.SubEnergy (towerToBuild.cost);
-		GameObject tower = (GameObject) Instantiate (towerToBuild.prefab, socket.GetBuildPosition (), Quaternion.identity);
-		socket.tower = tower;
+		GameObject tower = (GameObject) Instantiate (towerToBuild.prefab, socketToBuildOn.GetBuildPosition (), Quaternion.identity);
+		socketToBuildOn.tower = tower;
+		socketToBuildOn.gotTower = true;
+
+		//muss in UI-Script
+		towerShop.gameObject.SetActive(false);
 	}
 }

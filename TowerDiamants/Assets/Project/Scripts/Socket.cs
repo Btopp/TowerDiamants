@@ -3,15 +3,22 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Socket : MonoBehaviour {
 
 	public Color hoverColor;
 	private Color idolColor;
 
+	public Transform towerShop;
+	public Transform towerDetails;
+
 	public Vector3 positionOffset;
 
 	private Renderer rend;
+
+	[HideInInspector]
+	public bool gotTower = false;
 
 	BuildManager buildManager;
 
@@ -33,9 +40,9 @@ public class Socket : MonoBehaviour {
 		
 
 	void OnMouseEnter () {
-		if(!buildManager.CanBuild){
-			return;
-		}
+//		if(!buildManager.CanBuild){
+//			return;
+//		}
 		rend.material.color = hoverColor;
 	}
 
@@ -46,13 +53,24 @@ public class Socket : MonoBehaviour {
 
 
 	void OnMouseDown () {
-		if(!buildManager.CanBuild){
-			return;
-		}
+
+		buildManager.SelectSocketToBuildOn (this);
+
+//		if(!buildManager.CanBuild){
+//			return;
+//		}
 		if(tower != null){
-			Debug.Log ("Socket blocked");
+
+			//AUSLAGERN IN UI-Script
+			towerShop.gameObject.SetActive(false);
+			towerDetails.gameObject.SetActive(true);
 			return;
 		}
-		buildManager.BuildTowerOn (this);
+
+		//muss mit dem shop verknüpft sein
+		//AUSLAGERN IN UI-Script
+		towerDetails.gameObject.SetActive(false);
+		towerShop.gameObject.SetActive(true);
+
 	}
 }

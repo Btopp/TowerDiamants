@@ -23,15 +23,23 @@ public class TowerShop : MonoBehaviour {
 
 	public void SelectSquareTower () {
 		buildManager.SelectTowerToBuild(squareTower);
+
+		buildManager.BuildTower ();
 	}
 
 
 	public void SelectHexaTower () {
 		buildManager.SelectTowerToBuild (hexaTower);
+
+		buildManager.BuildTower ();
+
 	}
 
 
 	public void SelectCircTower () {
 		buildManager.SelectTowerToBuild (circTower);
+
+		buildManager.BuildTower ();
+
 	}
 }
