@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour {
 		if (waveIndex % bossIntervall == 0) {
 
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {
-				SpawnEnemy (enemySBRPrefab, waveIndex * 2);
+				SpawnEnemy (enemySBRPrefab, waveIndex * 3);
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
 		

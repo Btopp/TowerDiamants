@@ -49,6 +49,11 @@ public class Socket : MonoBehaviour {
 
 	void OnMouseExit () {
 		rend.material.color = idolColor;
+
+		//AUSLAGERN IN UI-Script
+		//Schlecht fuers testen auf pc geht nur auf smartphone
+		towerDetails.gameObject.SetActive(false);
+		towerShop.gameObject.SetActive(false);
 	}
 
 
