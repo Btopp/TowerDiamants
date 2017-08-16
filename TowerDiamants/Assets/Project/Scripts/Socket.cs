@@ -10,9 +10,6 @@ public class Socket : MonoBehaviour {
 	public Color hoverColor;
 	private Color idolColor;
 
-	public Transform towerShop;
-	public Transform towerDetails;
-
 	public Vector3 positionOffset;
 
 	private Renderer rend;
@@ -25,12 +22,14 @@ public class Socket : MonoBehaviour {
 	[HideInInspector]
 	public GameObject tower;
 
+	private UIManager uIManager;
+
 	public Vector3 GetBuildPosition () {
 		return transform.position + positionOffset;
 	}
-
-
+		
 	void Start(){
+		uIManager = (UIManager) GameObject.Find("UIManager").GetComponent<UIManager> ();
 		rend = GetComponent<Renderer> ();
 		buildManager = BuildManager.instance;
 		if (rend.material.color != null) {
@@ -38,44 +37,38 @@ public class Socket : MonoBehaviour {
 		}
 	}
 		
-
-	void OnMouseEnter () {
-//		if(!buildManager.CanBuild){
+	//FUER SP ENABLED
+//	void OnMouseEnter () {
+////		if(!buildManager.CanBuild){
+////			return;
+////		}
+//		if(EventSystem.current.IsPointerOverGameObject ()){
 //			return;
 //		}
-		rend.material.color = hoverColor;
-	}
-
-
+//
+//		rend.material.color = hoverColor;
+//	}
+		
 	void OnMouseExit () {
 		rend.material.color = idolColor;
 
-		//AUSLAGERN IN UI-Script
-		//Schlecht fuers testen auf pc geht nur auf smartphone
-		towerDetails.gameObject.SetActive(false);
-		towerShop.gameObject.SetActive(false);
+		// -> MUSS FUER SMARTPONE AKTIVE SEIN
+//		uIManager.DisableUI ();
 	}
 
-
 	void OnMouseDown () {
-
+		if(EventSystem.current.IsPointerOverGameObject ()){
+			return;
+		}
+		rend.material.color = hoverColor;
 		buildManager.SelectSocketToBuildOn (this);
-
 //		if(!buildManager.CanBuild){
 //			return;
 //		}
 		if(tower != null){
-
-			//AUSLAGERN IN UI-Script
-			towerShop.gameObject.SetActive(false);
-			towerDetails.gameObject.SetActive(true);
+			uIManager.EnableTowerDetails ();
 			return;
 		}
-
-		//muss mit dem shop verknüpft sein
-		//AUSLAGERN IN UI-Script
-		towerDetails.gameObject.SetActive(false);
-		towerShop.gameObject.SetActive(true);
-
+		uIManager.EnableTowerShop ();
 	}
 }

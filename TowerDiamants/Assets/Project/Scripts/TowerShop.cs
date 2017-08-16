@@ -1,8 +1,6 @@
 ﻿//by Niklas Bachmann
 //10.08.2017
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerShop : MonoBehaviour {
@@ -20,26 +18,18 @@ public class TowerShop : MonoBehaviour {
 		buildManager = BuildManager.instance;
 	}
 
-
 	public void SelectSquareTower () {
 		buildManager.SelectTowerToBuild(squareTower);
-
 		buildManager.BuildTower ();
 	}
-
 
 	public void SelectHexaTower () {
 		buildManager.SelectTowerToBuild (hexaTower);
-
 		buildManager.BuildTower ();
-
 	}
-
 
 	public void SelectCircTower () {
 		buildManager.SelectTowerToBuild (circTower);
-
 		buildManager.BuildTower ();
-
 	}
 }

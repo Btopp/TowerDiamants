@@ -18,23 +18,12 @@ public class Enemy : MonoBehaviour {
 	private Transform target;
 	private int wavepointIndex = 0;
 
-
 	void Start () {
 		hitPoints = startHitPoints;
 		target = Waypoints.targets [0];
 		hitPoints = startHitPoints;
 	}
 		
-
-	void Update () {
-		Vector3 dir = target.position - transform.position;
-		transform.Translate (dir.normalized * speed * Time.deltaTime);
-		if (Vector3.Distance (transform.position, target.position) <= 0.3) {
-			GetNextWaypoint ();
-		}
-	}
-
-
 	void GetNextWaypoint () {
 		if (wavepointIndex >= Waypoints.targets.Length - 1) {
 			ReachLastWaypoint ();
@@ -43,8 +32,7 @@ public class Enemy : MonoBehaviour {
 		wavepointIndex++;
 		target = Waypoints.targets [wavepointIndex];
 	}
-
-
+		
 	public void SubHitPoints (float amount) {
 		hitPoints -= amount;
 		if (hitPoints <= 0) {
@@ -52,15 +40,21 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-
 	void Die () {
 		PlayerStats.AddEnergy (energyBonus);
 		Destroy (gameObject);
 	}
 
-
 	void ReachLastWaypoint () {
 		PlayerStats.SubHearts (1);
 		Destroy (gameObject);
+	}
+
+	void Update () {
+		Vector3 dir = target.position - transform.position;
+		transform.Translate (dir.normalized * speed * Time.deltaTime);
+		if (Vector3.Distance (transform.position, target.position) <= 0.3) {
+			GetNextWaypoint ();
+		}
 	}
 }

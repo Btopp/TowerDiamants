@@ -20,7 +20,6 @@ public class Tower : MonoBehaviour {
 	public LineRenderer lineRenderer;
 	public float damagePerSec = 1.0f;
 
-
 	public string enemyTag = "Enemy";
 	private Transform target;
 	private Enemy targetEnemy;
@@ -30,125 +29,76 @@ public class Tower : MonoBehaviour {
 
 	public Transform firePoint;
 
-
 	void Start () {
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
 
-
-	void UpdateTarget(){
-
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag (enemyTag);
-
-		float shortestDistance = Mathf.Infinity;
-		GameObject nearestEnemy = null;
-
-		foreach (GameObject enemy in enemies) {
-
-			float distanceToEnemy = Vector3.Distance (transform.position, enemy.transform.position);
-			if (distanceToEnemy < shortestDistance) {
-
-				shortestDistance = distanceToEnemy;
-				nearestEnemy = enemy;
-
-			}
-		}
-
-		if (nearestEnemy != null && shortestDistance <= range) {
-
-			target = nearestEnemy.transform;
-			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
-
-		} else {
-
-			target = null;
-
-		}
-
-	}
-
-
 	void Shoot(){
-
 		GameObject projectileGO = Instantiate (projectilePrefab, firePoint.position, firePoint.rotation);
 		Projectile projectile = projectileGO.GetComponent<Projectile> ();
-
 		if (projectile != null) {
-
 			projectile.Seek (target);
-
 		}
 	}
-		
 
-	void Update () {
-
-		if (target == null) {
-
-			if (useLaser) {
-			
-				if (lineRenderer.enabled) {
-				
-					lineRenderer.enabled = false;
-				
-				}
-			
-			}
-
-			return;
-		}
-
-		LockOnTarget ();
-
-		if (useLaser) {
-		
-			Laser ();
-		
-		} else {
-		
-			if (fireCountdown <= 0f) {
-
-				Shoot ();
-				fireCountdown = 1f / fireRate;
-
-			}
-
-			fireCountdown -= Time.deltaTime;
-		
-		}
-			
-	}
-
-
-	void LockOnTarget () {
-	
+	void LockOnTarget () {	
 		Vector3 dir = target.position - transform.position;
 		Quaternion lookRotation = Quaternion.LookRotation (dir);
 		Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 		partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);
-
 	}
 
-
 	void Laser () {
-
 		targetEnemy.SubHitPoints (damagePerSec * Time.deltaTime);
-
-		if (!lineRenderer.enabled) {
-		
-			lineRenderer.enabled = true;
-		
-		}
-	
+		if (!lineRenderer.enabled) {		
+			lineRenderer.enabled = true;		
+		}	
 		lineRenderer.SetPosition (0, firePoint.position);
-		lineRenderer.SetPosition (1, target.position);
-	
+		lineRenderer.SetPosition (1, target.position);	
 	}
 
 	void OnDrawGizmosSelected () {
-
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);
 	}
 
+	void UpdateTarget(){
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag (enemyTag);
+		float shortestDistance = Mathf.Infinity;
+		GameObject nearestEnemy = null;
+		foreach (GameObject enemy in enemies) {
+			float distanceToEnemy = Vector3.Distance (transform.position, enemy.transform.position);
+			if (distanceToEnemy < shortestDistance) {
+				shortestDistance = distanceToEnemy;
+				nearestEnemy = enemy;
+			}
+		}
+		if (nearestEnemy != null && shortestDistance <= range) {
+			target = nearestEnemy.transform;
+			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
+		} else {
+			target = null;
+		}
+	}
+
+	void Update () {
+		if (target == null) {
+			if (useLaser) {
+				if (lineRenderer.enabled) {
+					lineRenderer.enabled = false;
+				}
+			}
+			return;
+		}
+		LockOnTarget ();
+		if (useLaser) {
+			Laser ();
+		} else {
+			if (fireCountdown <= 0f) {
+				Shoot ();
+				fireCountdown = 1f / fireRate;
+			}
+			fireCountdown -= Time.deltaTime;
+		}
+	}
 }

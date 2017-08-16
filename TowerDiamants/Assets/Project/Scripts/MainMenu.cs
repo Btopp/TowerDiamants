@@ -8,13 +8,11 @@ public class MainMenu : MonoBehaviour {
 
 	public void ChooseTutorial () {
 		SceneManager.LoadScene (1);
-	}
-		
+	}		
 
 	public void ChooseKampagne () {
 		SceneManager.LoadScene (1);
 	}
-
 
 	public void ChooseEndless () {
 		SceneManager.LoadScene (1);

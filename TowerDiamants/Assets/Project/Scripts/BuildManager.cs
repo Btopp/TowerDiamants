@@ -15,10 +15,7 @@ public class BuildManager : MonoBehaviour {
 	[HideInInspector]
 	public Socket socketToBuildOn;
 
-	//vorlaufig muss in UI-scipt
-	public Transform towerShop;
-	public Transform towerDetails;
-
+	private UIManager uIManager;
 
 	void Awake () {
 		if(instance != null){
@@ -26,7 +23,10 @@ public class BuildManager : MonoBehaviour {
 		}
 		instance = this;
 	}
-		
+
+	void Start () {
+		uIManager = (UIManager) GameObject.Find("UIManager").GetComponent<UIManager> ();
+	}
 
 	public void SelectTowerToBuild (TowerBlueprint tower) {
 		towerToBuild = tower;
@@ -35,8 +35,7 @@ public class BuildManager : MonoBehaviour {
 	public void SelectSocketToBuildOn (Socket socket) {
 		socketToBuildOn = socket;
 	}
-
-
+		
 	public void BuildTower () {
 
 		if (socketToBuildOn.gotTower) {
@@ -52,8 +51,13 @@ public class BuildManager : MonoBehaviour {
 		GameObject tower = (GameObject) Instantiate (towerToBuild.prefab, socketToBuildOn.GetBuildPosition (), Quaternion.identity);
 		socketToBuildOn.tower = tower;
 		socketToBuildOn.gotTower = true;
-
-		//muss in UI-Script
-		towerShop.gameObject.SetActive(false);
+		uIManager.DisableUI ();
+	}
+		
+	// todo: Towerdelete
+	public void DeleteTower () {
+	
+		// Destroy ();
+	
 	}
 }
