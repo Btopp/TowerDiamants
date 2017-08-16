@@ -18,7 +18,7 @@ public class BuildManager : MonoBehaviour {
 	private UIManager uIManager;
 
 	void Awake () {
-		if(instance != null){
+		if (instance != null) {
 			return;
 		}
 		instance = this;

@@ -37,11 +37,8 @@ public class Socket : MonoBehaviour {
 		}
 	}
 		
-	//FUER SP ENABLED
+	//FUER SP DISABLED
 //	void OnMouseEnter () {
-////		if(!buildManager.CanBuild){
-////			return;
-////		}
 //		if(EventSystem.current.IsPointerOverGameObject ()){
 //			return;
 //		}
@@ -50,22 +47,19 @@ public class Socket : MonoBehaviour {
 //	}
 		
 	void OnMouseExit () {
+		if (EventSystem.current.IsPointerOverGameObject ()) {
+			return;
+		}
 		rend.material.color = idolColor;
-
-		// -> MUSS FUER SMARTPONE AKTIVE SEIN
-//		uIManager.DisableUI ();
 	}
 
 	void OnMouseDown () {
-		if(EventSystem.current.IsPointerOverGameObject ()){
+		if (EventSystem.current.IsPointerOverGameObject ()) {
 			return;
 		}
 		rend.material.color = hoverColor;
 		buildManager.SelectSocketToBuildOn (this);
-//		if(!buildManager.CanBuild){
-//			return;
-//		}
-		if(tower != null){
+		if (tower != null) {
 			uIManager.EnableTowerDetails ();
 			return;
 		}
