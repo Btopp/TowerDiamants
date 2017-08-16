@@ -23,6 +23,10 @@ public class UIManager : MonoBehaviour {
 		overallDias.gameObject.SetActive (false);	
 	}
 
+	public void DisableOverallDias () {
+		overallDias.gameObject.SetActive (false);	
+	}
+
 	public void EnableTowerShop () {
 		DisableUI ();
 		towerShop.gameObject.SetActive (true);

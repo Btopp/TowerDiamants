@@ -1,14 +1,14 @@
 ﻿//by Niklas Bachmann
 //10.08.2017
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tower : MonoBehaviour {
 
 	[Header ("General")]
-	public float range = 8f;
+	public float StartRange = 8f;
+	[HideInInspector]
+	public float range;
 
 	[Header ("Use Projectiles")]
 	public GameObject projectilePrefab;
@@ -30,6 +30,7 @@ public class Tower : MonoBehaviour {
 	public Transform firePoint;
 
 	void Start () {
+		range = StartRange;
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
 
@@ -57,9 +58,11 @@ public class Tower : MonoBehaviour {
 		lineRenderer.SetPosition (1, target.position);	
 	}
 
+	//todo: ingame Rangeindicator
+
 	void OnDrawGizmosSelected () {
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, range);
+		Gizmos.DrawWireSphere(transform.position, StartRange);
 	}
 
 	void UpdateTarget(){
@@ -73,7 +76,7 @@ public class Tower : MonoBehaviour {
 				nearestEnemy = enemy;
 			}
 		}
-		if (nearestEnemy != null && shortestDistance <= range) {
+		if (nearestEnemy != null && shortestDistance <= StartRange) {
 			target = nearestEnemy.transform;
 			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
 		} else {

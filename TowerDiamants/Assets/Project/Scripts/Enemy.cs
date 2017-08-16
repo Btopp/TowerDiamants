@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour {
 	private int wavepointIndex = 0;
 
 	void Start () {
+		speed = startSpeed;
 		hitPoints = startHitPoints;
 		target = Waypoints.targets [0];
 		hitPoints = startHitPoints;
