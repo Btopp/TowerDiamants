@@ -23,6 +23,7 @@ public class Socket : MonoBehaviour {
 	public GameObject tower;
 
 	private UIManager uIManager;
+	private UpgradeManager upgradeManager;
 
 	public Vector3 GetBuildPosition () {
 		return transform.position + positionOffset;
@@ -30,6 +31,7 @@ public class Socket : MonoBehaviour {
 		
 	void Start(){
 		uIManager = (UIManager) GameObject.Find("UIManager").GetComponent<UIManager> ();
+		upgradeManager = (UpgradeManager) GameObject.Find("UpgradeManager").GetComponent<UpgradeManager> ();
 		rend = GetComponent<Renderer> ();
 		buildManager = BuildManager.instance;
 		if (rend.material.color != null) {
@@ -60,7 +62,9 @@ public class Socket : MonoBehaviour {
 		rend.material.color = hoverColor;
 		buildManager.SelectSocketToBuildOn (this);
 		if (tower != null) {
+			upgradeManager.SetSelectedTower (tower);
 			uIManager.EnableTowerDetails ();
+			upgradeManager.SetSlotSprites ();
 			return;
 		}
 		uIManager.EnableTowerShop ();
