@@ -29,6 +29,9 @@ public class Tower : MonoBehaviour {
 
 	public Transform firePoint;
 
+	[HideInInspector]
+	public int sellValue;
+
 	void Start () {
 		range = StartRange;
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);

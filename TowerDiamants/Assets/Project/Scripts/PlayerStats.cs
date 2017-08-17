@@ -19,13 +19,34 @@ public class PlayerStats : MonoBehaviour {
 	public static Text _energyText;
 	public static Text _heartsText;
 
+	public int blueDiamants = 0;
+	public int greenDiamants = 0;
+	public int redDiamants = 0;
+	public static int blueDiasToUse;
+	public static int greenDiasToUse;
+	public static int redDiasToUse;
+
+	public Text blueDiaText;
+	public Text greenDiaText;
+	public Text RedDiaText;
+	public static Text _blueDiaText;
+	public static Text _greenDiaText;
+	public static Text _redDiaText;
+
 	void Start () {
 		_energyText = energyText;
 		_heartsText = heartsText;
 		energy = startEngergy;
 		hearts = startHearts;
+		blueDiasToUse = blueDiamants;
+		greenDiasToUse = greenDiamants;
+		redDiasToUse = redDiamants;
+		_blueDiaText = blueDiaText;
+		_greenDiaText = greenDiaText;
+		_redDiaText = RedDiaText;
 		UpdateEnergyText ();
 		UpdateHeartsText ();
+		UpdateDiamantsText ();
 	}
 		
 	public static void UpdateEnergyText () {
@@ -34,6 +55,12 @@ public class PlayerStats : MonoBehaviour {
 		
 	public static void UpdateHeartsText () {
 		_heartsText.text = hearts.ToString ();
+	}
+
+	public static void UpdateDiamantsText () {
+		_blueDiaText.text = "x" + blueDiasToUse;
+		_greenDiaText.text = "x" + greenDiasToUse;
+		_redDiaText.text = "x" + redDiasToUse;
 	}
 		
 	public static void SubEnergy (int amount) {
@@ -54,5 +81,33 @@ public class PlayerStats : MonoBehaviour {
 	public static void AddHearts (int amount) {
 		hearts += amount;
 		UpdateHeartsText ();
+	}
+
+	public static void SubDiamantsToUs (int colorID, int amount) {
+		// ColorID: 1-Blue, 2-Green, 3-Red
+		if (colorID == 1) {
+			blueDiasToUse -= amount;
+		}
+		if (colorID == 2) {
+			greenDiasToUse -= amount;
+		}
+		if (colorID == 3) {
+			redDiasToUse -= amount;
+		}
+		UpdateDiamantsText ();
+	}
+
+	public static void AddDiamantsToUs (int colorID, int amount) {
+		// ColorID: 1-Blue, 2-Green, 3-Red
+		if (colorID == 1) {
+			blueDiasToUse += amount;
+		}
+		if (colorID == 2) {
+			greenDiasToUse += amount;
+		}
+		if (colorID == 3) {
+			redDiasToUse += amount;
+		}
+		UpdateDiamantsText ();
 	}
 }

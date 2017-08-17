@@ -17,6 +17,8 @@ public class BuildManager : MonoBehaviour {
 
 	private UIManager uIManager;
 
+	private ToastMessageScript toastMessageScript;
+
 	void Awake () {
 		if (instance != null) {
 			return;
@@ -25,6 +27,7 @@ public class BuildManager : MonoBehaviour {
 	}
 
 	void Start () {
+		toastMessageScript = GameObject.Find ("MASTER").GetComponent<ToastMessageScript> ();
 		uIManager = (UIManager) GameObject.Find("UIManager").GetComponent<UIManager> ();
 	}
 
@@ -38,26 +41,22 @@ public class BuildManager : MonoBehaviour {
 		
 	public void BuildTower () {
 
-		if (socketToBuildOn.gotTower) {
-			Debug.Log ("Socket blocked");
-			return;
-		}
+//		if (socketToBuildOn.gotTower) {
+//			toastMessageScript.showToastOnUiThread ("Socket blocked!");
+//			Debug.Log ("Socket blocked");
+//			return;
+//		}
 
 		if (PlayerStats.energy < towerToBuild.cost) {
+			toastMessageScript.showToastOnUiThread ("Not enough ENERGY!");
 			Debug.Log ("Not enough energy");
 			return;
 		}
 		PlayerStats.SubEnergy (towerToBuild.cost);
 		GameObject tower = (GameObject) Instantiate (towerToBuild.prefab, socketToBuildOn.GetBuildPosition (), Quaternion.identity);
 		socketToBuildOn.tower = tower;
+		socketToBuildOn.tower.GetComponent<Tower> ().sellValue = towerToBuild.cost;
 		socketToBuildOn.gotTower = true;
 		uIManager.DisableUI ();
-	}
-		
-	// todo: Towerdelete
-	public void DeleteTower () {
-	
-		// Destroy ();
-	
 	}
 }
