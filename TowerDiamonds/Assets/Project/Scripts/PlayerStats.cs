@@ -19,9 +19,9 @@ public class PlayerStats : MonoBehaviour {
 	public static Text _energyText;
 	public static Text _heartsText;
 
-	public int blueDiamants = 0;
-	public int greenDiamants = 0;
-	public int redDiamants = 0;
+	public int blueDiamonds = 0;
+	public int greenDiamonds = 0;
+	public int redDiamonds = 0;
 	public static int blueDiasToUse;
 	public static int greenDiasToUse;
 	public static int redDiasToUse;
@@ -38,9 +38,9 @@ public class PlayerStats : MonoBehaviour {
 		_heartsText = heartsText;
 		energy = startEngergy;
 		hearts = startHearts;
-		blueDiasToUse = blueDiamants;
-		greenDiasToUse = greenDiamants;
-		redDiasToUse = redDiamants;
+		blueDiasToUse = blueDiamonds;
+		greenDiasToUse = greenDiamonds;
+		redDiasToUse = redDiamonds;
 		_blueDiaText = blueDiaText;
 		_greenDiaText = greenDiaText;
 		_redDiaText = RedDiaText;

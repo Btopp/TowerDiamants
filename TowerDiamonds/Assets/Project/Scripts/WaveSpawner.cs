@@ -14,6 +14,7 @@ public class WaveSpawner : MonoBehaviour {
 	[Header ("Configs")]
 	public Transform spawnPoint;
 	public Text waveCountdownText;
+	public Text waveIndexText;
 	public int bossIntervall = 10;
 	public float timeBetweenWaves = 5.5f;
 	public float timeBetweenEnemys = 0.5f;
@@ -21,6 +22,7 @@ public class WaveSpawner : MonoBehaviour {
 	private int waveIndex = 0;
 		
 	IEnumerator SpawnWave () {
+		waveIndexText.text = (waveIndex + 1).ToString ();
 		waveIndex++;
 		if (waveIndex % bossIntervall == 0) {
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {

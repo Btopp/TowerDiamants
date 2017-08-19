@@ -59,7 +59,7 @@ public class UpgradeManager : MonoBehaviour {
 			Debug.Log ("Socket is used");	
 		} else {
 			if (PlayerStats.blueDiasToUse <= 0) {
-				toastMessageScript.showToastOnUiThread ("No Blue Diamants!");
+				toastMessageScript.showToastOnUiThread ("No Blue Diamonds!");
 				return;
 			}
 			selectedSlotImage.sprite = diaBlue;
@@ -75,7 +75,7 @@ public class UpgradeManager : MonoBehaviour {
 			Debug.Log ("Socket is used");	
 		} else {
 			if (PlayerStats.greenDiasToUse <= 0) {
-				toastMessageScript.showToastOnUiThread ("No Green Diamants!");
+				toastMessageScript.showToastOnUiThread ("No Green Diamonds!");
 				return;
 			}
 			selectedSlotImage.sprite = diaGreen;
@@ -91,7 +91,7 @@ public class UpgradeManager : MonoBehaviour {
 			Debug.Log ("Socket is used");	
 		} else {
 			if (PlayerStats.redDiasToUse <= 0) {
-				toastMessageScript.showToastOnUiThread ("No Red Diamants!");
+				toastMessageScript.showToastOnUiThread ("No Red Diamonds!");
 				return;
 			}
 			selectedSlotImage.sprite = diaRed;
