@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
@@ -11,10 +12,16 @@ public class UIManager : MonoBehaviour {
 	public Transform towerDias;
 	public Transform overallDias;
 
-	// muss in GameManager
-	public void BackToMainMenu () {
-		SceneManager.LoadScene (0);
-	}		
+	public GameObject pauseButton;
+	private Image pauseButtonImage;
+	private Sprite pauseSprite;
+	public Sprite playSprite;
+
+	void Start () {	
+		pauseButtonImage = pauseButton.GetComponent<Image> ();
+		pauseSprite = pauseButtonImage.sprite;	
+	}
+
 
 	public void DisableUI () {
 		towerShop.gameObject.SetActive (false);
@@ -44,5 +51,13 @@ public class UIManager : MonoBehaviour {
 
 	public void EnableOverallDias () {
 		overallDias.gameObject.SetActive (true);
+	}
+
+	public void SwitchPauseButtonSprite () {
+		if (pauseButtonImage.sprite == pauseSprite) {
+			pauseButtonImage.sprite = playSprite;
+		} else {
+			pauseButtonImage.sprite = pauseSprite;
+		}
 	}
 }
