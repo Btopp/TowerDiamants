@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour {
 	[Header ("Use Laser")]
 	public bool useLaser = false;
 	public LineRenderer lineRenderer;
+	public ParticleSystem impactEffect;
 	public float damagePerSec = 1.0f;
 
 	public string enemyTag = "Enemy";
@@ -54,11 +55,19 @@ public class Tower : MonoBehaviour {
 
 	void Laser () {
 		targetEnemy.SubHitPoints (damagePerSec * Time.deltaTime);
-		if (!lineRenderer.enabled) {		
-			lineRenderer.enabled = true;		
+		if (!lineRenderer.enabled) {			
+			lineRenderer.enabled = true;
+			impactEffect.Play ();		
 		}	
 		lineRenderer.SetPosition (0, firePoint.position);
-		lineRenderer.SetPosition (1, target.position);	
+		lineRenderer.SetPosition (1, target.position);
+
+		Vector3 dir = firePoint.position - target.position;
+
+		impactEffect.transform.position = target.position + dir.normalized * 0.25f;
+
+		impactEffect.transform.rotation = Quaternion.LookRotation (dir);
+
 	}
 
 	//todo: ingame Rangeindicator
@@ -92,6 +101,7 @@ public class Tower : MonoBehaviour {
 			if (useLaser) {
 				if (lineRenderer.enabled) {
 					lineRenderer.enabled = false;
+					impactEffect.Stop ();
 				}
 			}
 			return;
