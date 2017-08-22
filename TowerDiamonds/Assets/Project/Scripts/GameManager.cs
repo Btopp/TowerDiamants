@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
 
 	[HideInInspector]
 	public bool pauseButtonPressed = false;
+	[HideInInspector]
+	public bool speedUpButtonPressed = false;
 
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
@@ -28,12 +30,26 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PressPauseButton () {
-			if (pauseButtonPressed) {
+		if (pauseButtonPressed) {
 			StartGame ();
 			pauseButtonPressed = false;
 		} else {
 			PauseGame ();
 			pauseButtonPressed = true;
+		}	
+	}
+
+	public void SpeeUp () {	
+		Time.timeScale = 2f;	
+	}
+
+	public void PressSpeedUpButton () {
+		if (speedUpButtonPressed) {
+			StartGame ();
+			speedUpButtonPressed = false;
+		} else {
+			SpeeUp ();
+			speedUpButtonPressed = true;
 		}	
 	}
 }
