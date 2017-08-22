@@ -9,17 +9,23 @@ public class Tower : MonoBehaviour {
 	public float StartRange = 8f;
 	[HideInInspector]
 	public float range;
+	public int slowPercent = 0;
 
 	[Header ("Use Projectiles")]
 	public GameObject projectilePrefab;
 	public float fireRate = 1f;
 	private float fireCountdown = 0f;
+	public float startProjectileDamage = 1f;
+	[HideInInspector]
+	public float projectileDamage = 0f;
 
 	[Header ("Use Laser")]
 	public bool useLaser = false;
 	public LineRenderer lineRenderer;
-	public ParticleSystem impactEffect;
-	public float damagePerSec = 1.0f;
+	public ParticleSystem impactEffect; 
+	public float startDamagePerSec = 0f;
+	[HideInInspector]
+	public float damagePerSec = 0f;
 
 	public string enemyTag = "Enemy";
 	private Transform target;
@@ -34,6 +40,8 @@ public class Tower : MonoBehaviour {
 	public int sellValue;
 
 	void Start () {
+		damagePerSec = startDamagePerSec;
+		projectileDamage = startProjectileDamage;
 		range = StartRange;
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
@@ -42,6 +50,8 @@ public class Tower : MonoBehaviour {
 		GameObject projectileGO = Instantiate (projectilePrefab, firePoint.position, firePoint.rotation);
 		Projectile projectile = projectileGO.GetComponent<Projectile> ();
 		if (projectile != null) {
+			projectile.damage = projectileDamage;
+			projectile.slowPercent = slowPercent;
 			projectile.Seek (target);
 		}
 	}
@@ -55,6 +65,13 @@ public class Tower : MonoBehaviour {
 
 	void Laser () {
 		targetEnemy.SubHitPoints (damagePerSec * Time.deltaTime);
+
+		if (slowPercent > 0) {
+		
+			targetEnemy.Slow (slowPercent);
+		
+		}
+
 		if (!lineRenderer.enabled) {			
 			lineRenderer.enabled = true;
 			impactEffect.Play ();		
@@ -74,7 +91,7 @@ public class Tower : MonoBehaviour {
 
 	void OnDrawGizmosSelected () {
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, StartRange);
+		Gizmos.DrawWireSphere(transform.position, range);
 	}
 
 	void UpdateTarget(){
@@ -88,7 +105,7 @@ public class Tower : MonoBehaviour {
 				nearestEnemy = enemy;
 			}
 		}
-		if (nearestEnemy != null && shortestDistance <= StartRange) {
+		if (nearestEnemy != null && shortestDistance <= range) {
 			target = nearestEnemy.transform;
 			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
 		} else {

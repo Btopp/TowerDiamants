@@ -20,26 +20,42 @@ public class WaveSpawner : MonoBehaviour {
 	public float timeBetweenEnemys = 0.5f;
 	private float countdown = 5.5f;
 	private int waveIndex = 0;
-		
+
+	//Vorerst: todo: auslagern
+	private ToastMessageScript toastMessageScript;
+
+	void Start () {
+		toastMessageScript = GameObject.Find ("MASTER").GetComponent<ToastMessageScript> ();
+	}
+
 	IEnumerator SpawnWave () {
 		waveIndexText.text = (waveIndex + 1).ToString ();
 		waveIndex++;
 		if (waveIndex % bossIntervall == 0) {
+			//EXPERIMENTEL
+			GiveDiamonds ();
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {
-				SpawnEnemy (enemySBRPrefab, waveIndex * 3);
+				SpawnEnemy (enemySBRPrefab, waveIndex * 3.5f);
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
 		} else {
 			for (int i = 0; i < waveIndex; i++) {
-				SpawnEnemy (enemySPrefab, waveIndex);
+				SpawnEnemy (enemySPrefab, waveIndex * 1.5f);
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
 		}
 	}
 		
-	void SpawnEnemy (Transform enemy, int amount) {
+	void SpawnEnemy (Transform enemy, float amount) {
 		Transform spawnedEnemy = Instantiate (enemy, spawnPoint.position, spawnPoint.rotation);
 		spawnedEnemy.GetComponent<Enemy> ().startHitPoints += amount - 1;
+	}
+
+	//ESPERIMENTEL
+	void GiveDiamonds () {
+		int random = (int) Mathf.Round (Random.Range (1, 3));
+		PlayerStats.AddDiamondsToUse (random, 1);
+		toastMessageScript.showToastOnUiThread ("You receive a Diamond!");
 	}
 
 	void Update () {

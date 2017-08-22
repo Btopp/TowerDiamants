@@ -46,7 +46,7 @@ public class PlayerStats : MonoBehaviour {
 		_redDiaText = RedDiaText;
 		UpdateEnergyText ();
 		UpdateHeartsText ();
-		UpdateDiamantsText ();
+		UpdateDiamondText ();
 	}
 		
 	public static void UpdateEnergyText () {
@@ -57,7 +57,7 @@ public class PlayerStats : MonoBehaviour {
 		_heartsText.text = hearts.ToString ();
 	}
 
-	public static void UpdateDiamantsText () {
+	public static void UpdateDiamondText () {
 		_blueDiaText.text = "x" + blueDiasToUse;
 		_greenDiaText.text = "x" + greenDiasToUse;
 		_redDiaText.text = "x" + redDiasToUse;
@@ -83,7 +83,7 @@ public class PlayerStats : MonoBehaviour {
 		UpdateHeartsText ();
 	}
 
-	public static void SubDiamantsToUs (int colorID, int amount) {
+	public static void SubDiamondsToUse (int colorID, int amount) {
 		// ColorID: 1-Blue, 2-Green, 3-Red
 		if (colorID == 1) {
 			blueDiasToUse -= amount;
@@ -94,10 +94,10 @@ public class PlayerStats : MonoBehaviour {
 		if (colorID == 3) {
 			redDiasToUse -= amount;
 		}
-		UpdateDiamantsText ();
+		UpdateDiamondText ();
 	}
 
-	public static void AddDiamantsToUs (int colorID, int amount) {
+	public static void AddDiamondsToUse (int colorID, int amount) {
 		// ColorID: 1-Blue, 2-Green, 3-Red
 		if (colorID == 1) {
 			blueDiasToUse += amount;
@@ -108,6 +108,6 @@ public class PlayerStats : MonoBehaviour {
 		if (colorID == 3) {
 			redDiasToUse += amount;
 		}
-		UpdateDiamantsText ();
+		UpdateDiamondText ();
 	}
 }

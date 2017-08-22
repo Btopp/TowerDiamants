@@ -3,7 +3,15 @@
 
 using UnityEngine;
 
-public class TowerUpgradeStats : MonoBehaviour {
+[RequireComponent(typeof(Tower))]
+public class TowerUpgrade : MonoBehaviour {
+
+	[HideInInspector]
+	public Diamond slotOneDia;
+	[HideInInspector]
+	public Diamond slotTwoDia;
+	[HideInInspector]
+	public Diamond slotThreeDia;
 
 	[HideInInspector]
 	public Sprite slotOneSprite;
@@ -32,7 +40,7 @@ public class TowerUpgradeStats : MonoBehaviour {
 		slotOneSprite = sprite;	
 	}
 
-	public void SaveSlotSprites (Sprite slot1Sprite, Sprite slot2Sprite, Sprite slot3Sprite) {
+	public void SaveSlots (Sprite slot1Sprite, Sprite slot2Sprite, Sprite slot3Sprite) {
 		slotOneSprite = slot1Sprite;
 		slotTwoSprite = slot2Sprite;
 		slotThreeSprite = slot3Sprite;

@@ -8,14 +8,17 @@ public class Projectile : MonoBehaviour {
 	private Transform target;
 	public float speed = 20f;
 	public float explosionRadius = 0f;
-	public int damage = 1;
+	[HideInInspector]
+	public float damage = 1f;
 	public GameObject impactEffekt;
+	[HideInInspector]
+	public int slowPercent = 0;
 
 	public void Seek (Transform _target) {
 		target = _target;
 	}		
 
-	void HitTarget (){
+	void HitTarget () {
 		GameObject effectIns = Instantiate (impactEffekt, transform.position, transform.rotation);
 		Destroy (effectIns, 2f);
 		if (explosionRadius > 0f) {		
@@ -36,6 +39,14 @@ public class Projectile : MonoBehaviour {
 	}
 
 	void Damage (Transform enemy) {
+		if (slowPercent > 0) {
+			if (target == enemy) {
+				enemy.GetComponent<Enemy>().Slow (slowPercent);
+			} else {
+				enemy.GetComponent<Enemy>().Slow (slowPercent / 2);
+			}
+
+		}
 		enemy.GetComponent<Enemy> ().SubHitPoints (damage);
 	}
 

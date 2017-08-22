@@ -22,7 +22,10 @@ public class UpgradeManager : MonoBehaviour {
 	public Sprite diaGreen;
 	public Sprite diaRed;
 
-	private Sprite selectedDia;
+//	private Sprite selectedDiaSprite;
+
+	//neu
+//	private Diamond selectedDia;
 
 	private GameObject selectedTower;
 
@@ -53,7 +56,7 @@ public class UpgradeManager : MonoBehaviour {
 		UpdateSlotSprite ();
 	}
 
-	public void SelectDiamantBlue () {
+	public void SelectDiamondBlue () {
 		if (selectedSlotImage.sprite != diaDefault) {
 			//Vorerst. todo: Soll den richtigen Dia austauschen
 			Debug.Log ("Socket is used");	
@@ -63,13 +66,16 @@ public class UpgradeManager : MonoBehaviour {
 				return;
 			}
 			selectedSlotImage.sprite = diaBlue;
-			SaveSlotSprites ();
-			PlayerStats.SubDiamantsToUs (1, 1);
+			//UPGRADE todo: auskoppeln
+			Tower tower = selectedTower.GetComponent<Tower>();
+			tower.slowPercent += 10;
+			SaveSlots ();
+			PlayerStats.SubDiamondsToUse (1, 1);
 		}
 		uIManager.DisableOverallDias ();
 	}
 
-	public void SelectDiamantGreen () {
+	public void SelectDiamondGreen () {
 		if (selectedSlotImage.sprite != diaDefault) {
 			//Vorerst. todo: Soll den richtigen Dia austauschen
 			Debug.Log ("Socket is used");	
@@ -79,13 +85,16 @@ public class UpgradeManager : MonoBehaviour {
 				return;
 			}
 			selectedSlotImage.sprite = diaGreen;
-			SaveSlotSprites ();
-			PlayerStats.SubDiamantsToUs (2, 1);
+			//UPGRADE todo: auskoppeln
+			Tower tower = selectedTower.GetComponent<Tower>();
+			tower.range += tower.StartRange * 0.1f;
+			SaveSlots ();
+			PlayerStats.SubDiamondsToUse (2, 1);
 		}
 		uIManager.DisableOverallDias ();
 	}
 
-	public void SelectDiamantRed () {
+	public void SelectDiamondRed () {
 		if (selectedSlotImage.sprite != diaDefault) {
 			//Vorerst. todo: Soll den richtigen Dia austauschen
 			Debug.Log ("Socket is used");	
@@ -95,8 +104,12 @@ public class UpgradeManager : MonoBehaviour {
 				return;
 			}
 			selectedSlotImage.sprite = diaRed;
-			SaveSlotSprites ();
-			PlayerStats.SubDiamantsToUs (3, 1);
+			//UPGRADE todo: auskoppeln
+			Tower tower = selectedTower.GetComponent<Tower>();
+			tower.projectileDamage += tower.startProjectileDamage * 0.1f;
+			tower.damagePerSec += tower.startDamagePerSec * 0.1f;
+			SaveSlots ();
+			PlayerStats.SubDiamondsToUse (3, 1);
 		}
 		uIManager.DisableOverallDias ();
 	}
@@ -106,9 +119,9 @@ public class UpgradeManager : MonoBehaviour {
 	}
 
 	public void SetSlotSprites (){
-		Sprite towerSlot1Sprite = selectedTower.GetComponent<TowerUpgradeStats> ().slotOneSprite;
-		Sprite towerSlot2Sprite = selectedTower.GetComponent<TowerUpgradeStats> ().slotTwoSprite;
-		Sprite towerSlot3Sprite = selectedTower.GetComponent<TowerUpgradeStats> ().slotThreeSprite;
+		Sprite towerSlot1Sprite = selectedTower.GetComponent<TowerUpgrade> ().slotOneSprite;
+		Sprite towerSlot2Sprite = selectedTower.GetComponent<TowerUpgrade> ().slotTwoSprite;
+		Sprite towerSlot3Sprite = selectedTower.GetComponent<TowerUpgrade> ().slotThreeSprite;
 		if (towerSlot1Sprite != null) {
 			slotOneImage.sprite = towerSlot1Sprite;
 		} else {
@@ -128,10 +141,9 @@ public class UpgradeManager : MonoBehaviour {
 		}
 	}
 
-	public void SaveSlotSprites (){
-		selectedTower.GetComponent<TowerUpgradeStats> ().SaveSlotSprites (slotOneImage.sprite, slotTwoImage.sprite, slotThreeImage.sprite);
+	public void SaveSlots (){
+		selectedTower.GetComponent<TowerUpgrade> ().SaveSlots (slotOneImage.sprite, slotTwoImage.sprite, slotThreeImage.sprite);
 	}
-
 
 	public void UpdateSlotSprite () {
 		selectedSlotImage = selectedSlot.GetComponent<Image> ();
@@ -142,6 +154,5 @@ public class UpgradeManager : MonoBehaviour {
 		PlayerStats.AddEnergy ((int) Mathf.Floor (0.6f * selectedTower.GetComponent<Tower>().sellValue));
 		Destroy (selectedTower);
 		uIManager.DisableUI ();
-
 	}
 }
