@@ -55,7 +55,7 @@ public class WaveSpawner : MonoBehaviour {
 	void GiveDiamonds () {
 		int random = (int) Mathf.Round (Random.Range (1, 3));
 		PlayerStats.AddDiamondsToUse (random, 1);
-		toastMessageScript.showToastOnUiThread ("You receive a Diamond!");
+		//toastMessageScript.showToastOnUiThread ("You receive a Diamond!");
 	}
 
 	void Update () {
