@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour {
 
 	void HitTarget () {
 		GameObject effectIns = Instantiate (impactEffekt, transform.position, transform.rotation);
-		Destroy (effectIns, 2f);
+		Destroy (effectIns, 2.0f);
 		if (explosionRadius > 0f) {		
 			Explode ();		
 		} else {

@@ -31,6 +31,8 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Die () {
+		GameObject effect = (GameObject) Instantiate (deathEffect, transform.position, Quaternion.identity);
+		Destroy (effect, 2.0f);
 		PlayerStats.AddEnergy (energyBonus);
 		Destroy (gameObject);
 	}
