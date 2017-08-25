@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
+	
+	[HideInInspector]
+	public Socket selectedSocket;
 
 	public Transform towerShop;
 	public Transform towerDetails;

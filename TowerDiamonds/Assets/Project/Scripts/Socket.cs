@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class Socket : MonoBehaviour {
 
+	//ESPERIMENTEL
+	Ray ray;
+	RaycastHit hit;
+
 	public Color hoverColor;
 	private Color idolColor;
 
@@ -47,24 +51,39 @@ public class Socket : MonoBehaviour {
 //
 //		rend.material.color = hoverColor;
 //	}
-		
+
+	//TEST
 	void OnMouseExit () {
-		if (EventSystem.current.IsPointerOverGameObject ()) {
-			return;
+		Debug.Log (EventSystem.current.gameObject.name);
+		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		if (Physics.Raycast(ray, out hit)) {
+			if(hit.collider.name == "Upgrade"){
+				Debug.Log (hit.collider.name);
+				return;
+			}
 		}
+		SetIdolColor ();
+	}
+
+	public void SetIdolColor () {
 		rend.material.color = idolColor;
 	}
 
+	public void SetHoverColor () {
+		rend.material.color = hoverColor;
+	}
+
 	void OnMouseDown () {
-		if (EventSystem.current.IsPointerOverGameObject ()) {
-			return;
-		}
+//		if (EventSystem.current.IsPointerOverGameObject ()) {
+//			return;
+//		}
 		rend.material.color = hoverColor;
 		buildManager.SelectSocketToBuildOn (this);
 		if (tower != null) {
 			upgradeManager.SetSelectedTower (tower);
 			uIManager.EnableTowerDetails ();
 			upgradeManager.SetSlotSprites ();
+			SetHoverColor ();
 			return;
 		}
 		uIManager.EnableTowerShop ();

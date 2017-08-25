@@ -7,6 +7,8 @@ public class BuildManager : MonoBehaviour {
 
 	public static BuildManager instance;
 
+	public GameObject buildEffect;
+
 	public GameObject squareTowerPrefab;
 	public GameObject hexaTowerPrefab;
 	public GameObject circTowerPrefab;
@@ -41,6 +43,7 @@ public class BuildManager : MonoBehaviour {
 		
 	public void BuildTower () {
 
+		//Ist nicht mehr noetig
 //		if (socketToBuildOn.gotTower) {
 //			toastMessageScript.showToastOnUiThread ("Socket blocked!");
 //			Debug.Log ("Socket blocked");
@@ -53,6 +56,8 @@ public class BuildManager : MonoBehaviour {
 			return;
 		}
 		PlayerStats.SubEnergy (towerToBuild.cost);
+		GameObject effect = (GameObject) Instantiate (buildEffect, socketToBuildOn.transform.position, Quaternion.identity);
+		Destroy (effect, 2.0f);
 		GameObject tower = (GameObject) Instantiate (towerToBuild.prefab, socketToBuildOn.GetBuildPosition (), Quaternion.identity);
 		socketToBuildOn.tower = tower;
 		socketToBuildOn.tower.GetComponent<Tower> ().sellValue = towerToBuild.cost;

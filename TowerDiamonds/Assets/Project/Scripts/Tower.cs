@@ -6,10 +6,11 @@ using UnityEngine;
 public class Tower : MonoBehaviour {
 
 	[Header ("General")]
-	public float StartRange = 8f;
+	public float startRange = 8f;
 	[HideInInspector]
 	public float range;
 	public int slowPercent = 0;
+	public GameObject rangeIndicator;
 
 	[Header ("Use Projectiles")]
 	public GameObject projectilePrefab;
@@ -42,8 +43,16 @@ public class Tower : MonoBehaviour {
 	void Start () {
 		damagePerSec = startDamagePerSec;
 		projectileDamage = startProjectileDamage;
-		range = StartRange;
+		range = startRange;
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
+	}
+
+	public void EnableRangeIndicator () {
+		rangeIndicator.SetActive (true);
+	}
+
+	public void DisableRangeIndicator () {
+		rangeIndicator.SetActive (false);
 	}
 
 	void Shoot(){
@@ -91,7 +100,7 @@ public class Tower : MonoBehaviour {
 
 	void OnDrawGizmosSelected () {
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, range);
+		Gizmos.DrawWireSphere(transform.position, startRange);
 	}
 
 	void UpdateTarget(){

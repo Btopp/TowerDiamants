@@ -87,7 +87,7 @@ public class UpgradeManager : MonoBehaviour {
 			selectedSlotImage.sprite = diaGreen;
 			//UPGRADE todo: auskoppeln
 			Tower tower = selectedTower.GetComponent<Tower>();
-			tower.range += tower.StartRange * 0.1f;
+			tower.range += tower.startRange * 0.1f;
 			SaveSlots ();
 			PlayerStats.SubDiamondsToUse (2, 1);
 		}
