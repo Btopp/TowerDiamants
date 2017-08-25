@@ -35,12 +35,12 @@ public class WaveSpawner : MonoBehaviour {
 			//EXPERIMENTEL
 			GiveDiamonds ();
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {
-				SpawnEnemy (enemySBRPrefab, waveIndex * 3.5f);
+				SpawnEnemy (enemySBRPrefab, waveIndex * 2.0f);
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
 		} else {
 			for (int i = 0; i < waveIndex; i++) {
-				SpawnEnemy (enemySPrefab, waveIndex * 1.5f);
+				SpawnEnemy (enemySPrefab, waveIndex * 1.0f);
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
 		}
