@@ -22,7 +22,6 @@ public class ToastMessageScript : MonoBehaviour
 		}
 	}
 
-
 	public void showToastOnUiThread(string toastString)
 	{
 		this.toastString = toastString;

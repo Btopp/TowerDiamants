@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour {
 	private int wavepointIndex = 0;
 
 	private float slowCountdown = 0f;
-	public float slowTime = 1f;
+	public float slowTime = 2f;
 
 	private Enemy enemy;
 

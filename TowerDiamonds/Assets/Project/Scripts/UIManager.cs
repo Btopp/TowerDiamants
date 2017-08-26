@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour {
 	public void EnableTowerDias () {
 		DisableUI ();
 		towerDias.gameObject.SetActive (true);
+		selectedSocket.SetHoverColor ();
 	}
 
 	public void EnableOverallDias () {
@@ -62,5 +63,9 @@ public class UIManager : MonoBehaviour {
 		} else {
 			pauseButtonImage.sprite = pauseSprite;
 		}
+	}
+
+	public void SetSelectedSocket (Socket socket) {
+		selectedSocket = socket;
 	}
 }

@@ -12,6 +12,18 @@ public class Tower : MonoBehaviour {
 	public int slowPercent = 0;
 	public GameObject rangeIndicator;
 
+	public string enemyTag = "Enemy";
+	private Transform target;
+	private Enemy targetEnemy;
+
+	public Transform partToRotate;
+	public float turnSpeed = 10f;
+
+	public Transform firePoint;
+
+	public AudioClip shotSound;
+	private AudioManager audioManager;
+
 	[Header ("Use Projectiles")]
 	public GameObject projectilePrefab;
 	public float fireRate = 1f;
@@ -28,15 +40,6 @@ public class Tower : MonoBehaviour {
 	[HideInInspector]
 	public float damagePerSec = 0f;
 
-	public string enemyTag = "Enemy";
-	private Transform target;
-	private Enemy targetEnemy;
-
-	public Transform partToRotate;
-	public float turnSpeed = 10f;
-
-	public Transform firePoint;
-
 	[HideInInspector]
 	public int sellValue;
 
@@ -44,6 +47,7 @@ public class Tower : MonoBehaviour {
 		damagePerSec = startDamagePerSec;
 		projectileDamage = startProjectileDamage;
 		range = startRange;
+		audioManager = GameObject.Find ("MASTER").GetComponent<AudioManager> ();
 		InvokeRepeating ("UpdateTarget", 0f, 0.5f);
 	}
 
@@ -55,7 +59,8 @@ public class Tower : MonoBehaviour {
 		rangeIndicator.SetActive (false);
 	}
 
-	void Shoot(){
+	void Shoot () {
+		audioManager.PlayShotSound (shotSound);
 		GameObject projectileGO = Instantiate (projectilePrefab, firePoint.position, firePoint.rotation);
 		Projectile projectile = projectileGO.GetComponent<Projectile> ();
 		if (projectile != null) {
@@ -100,7 +105,7 @@ public class Tower : MonoBehaviour {
 
 	void OnDrawGizmosSelected () {
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, startRange);
+		Gizmos.DrawWireSphere(transform.position, range);
 	}
 
 	void UpdateTarget(){
@@ -114,12 +119,40 @@ public class Tower : MonoBehaviour {
 				nearestEnemy = enemy;
 			}
 		}
-		if (nearestEnemy != null && shortestDistance <= range) {
+		////Wert wurde um 1.1f korrigiert damit die Tower korrekt schiessen
+		if (nearestEnemy != null && shortestDistance <= range * 1.0f) {
 			target = nearestEnemy.transform;
 			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
 		} else {
 			target = null;
 		}
+	}
+
+	public void SetSlow () {
+		slowPercent += 30;
+	}
+
+	public void SetRange () {
+		//+20%
+//		range += startRange * 0.2f;
+		//*20%
+		range *= 1.15f;
+		rangeIndicator.transform.localScale *= 1.15f;
+	}
+
+	public void SetDamage () {
+//		projectileDamage += startProjectileDamage * 0.5f;
+//		damagePerSec += startDamagePerSec * 0.5f;
+		projectileDamage *= 1.5f;
+		damagePerSec *= 1.5f;
+	}
+
+	public void SetRangeIndicatorOn () {
+		rangeIndicator.SetActive (true);
+	}
+
+	public void SetRangeIndicatorOff () {
+		rangeIndicator.SetActive (false);
 	}
 
 	void Update () {

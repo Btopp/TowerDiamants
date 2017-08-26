@@ -16,11 +16,13 @@ public class Enemy : MonoBehaviour {
 	public int energyBonus = 15;
 
 	public GameObject deathEffect;
+	private AudioManager audioManager;
 
 	void Start () {
 		speed = startSpeed;
 		hitPoints = startHitPoints;
 		hitPoints = startHitPoints;
+		audioManager = GameObject.Find ("MASTER").GetComponent<AudioManager> ();
 	}
 		
 	public void SubHitPoints (float amount) {
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Die () {
+		audioManager.PlayDeathSound ();
 		GameObject effect = (GameObject) Instantiate (deathEffect, transform.position, Quaternion.identity);
 		Destroy (effect, 2.0f);
 		PlayerStats.AddEnergy (energyBonus);

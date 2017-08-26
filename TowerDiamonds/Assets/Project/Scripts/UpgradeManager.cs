@@ -66,9 +66,7 @@ public class UpgradeManager : MonoBehaviour {
 				return;
 			}
 			selectedSlotImage.sprite = diaBlue;
-			//UPGRADE todo: auskoppeln
-			Tower tower = selectedTower.GetComponent<Tower>();
-			tower.slowPercent += 10;
+			selectedTower.GetComponent<Tower>().SetSlow();
 			SaveSlots ();
 			PlayerStats.SubDiamondsToUse (1, 1);
 		}
@@ -85,9 +83,7 @@ public class UpgradeManager : MonoBehaviour {
 				return;
 			}
 			selectedSlotImage.sprite = diaGreen;
-			//UPGRADE todo: auskoppeln
-			Tower tower = selectedTower.GetComponent<Tower>();
-			tower.range += tower.startRange * 0.1f;
+			selectedTower.GetComponent<Tower>().SetRange();
 			SaveSlots ();
 			PlayerStats.SubDiamondsToUse (2, 1);
 		}
@@ -104,10 +100,7 @@ public class UpgradeManager : MonoBehaviour {
 				return;
 			}
 			selectedSlotImage.sprite = diaRed;
-			//UPGRADE todo: auskoppeln
-			Tower tower = selectedTower.GetComponent<Tower>();
-			tower.projectileDamage += tower.startProjectileDamage * 0.1f;
-			tower.damagePerSec += tower.startDamagePerSec * 0.1f;
+			selectedTower.GetComponent<Tower>().SetDamage();
 			SaveSlots ();
 			PlayerStats.SubDiamondsToUse (3, 1);
 		}

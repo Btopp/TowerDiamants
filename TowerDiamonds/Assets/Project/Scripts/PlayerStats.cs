@@ -33,6 +33,11 @@ public class PlayerStats : MonoBehaviour {
 	public static Text _greenDiaText;
 	public static Text _redDiaText;
 
+	[HideInInspector]
+	public bool sound;
+	[HideInInspector]
+	public bool music;
+
 	void Start () {
 		_energyText = energyText;
 		_heartsText = heartsText;
