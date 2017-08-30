@@ -15,18 +15,31 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void ChooseEndless () {
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene (2);
 	}
 
 	public void ChooseSound () {
-
 		//Sound on/off
-
+		if (PlayerStats.sound) {
+			PlayerStats.sound = false;
+		} else {
+			PlayerStats.sound = true;
+		}
 	}
 
 	public void ChooseMusic () {
-
 		//Music on/off
+		//Sound on/off
+		if (PlayerStats.music) {
+			PlayerStats.music = false;
+		} else {
+			PlayerStats.music = true;
+		}
+	}
 
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit ();
+		}	
 	}
 }

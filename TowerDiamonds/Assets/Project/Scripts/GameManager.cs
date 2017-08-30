@@ -11,12 +11,6 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector]
 	public bool speedUpButtonPressed = false;
 
-	void Update () {
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			BackToMainMenu ();
-		}			
-	}
-
 	public void BackToMainMenu () {
 		SceneManager.LoadScene (0);
 	}
@@ -51,5 +45,11 @@ public class GameManager : MonoBehaviour {
 			SpeeUp ();
 			speedUpButtonPressed = true;
 		}	
+	}
+
+	void Update () {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			BackToMainMenu ();
+		}			
 	}
 }
