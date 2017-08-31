@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector]
 	public bool speedUpButtonPressed = false;
 
+	void Start () {
+		Time.timeScale = 0f;
+	}
+
 	public void BackToMainMenu () {
 		SceneManager.LoadScene (0);
 	}
