@@ -8,13 +8,13 @@ public class EnemyMovement : MonoBehaviour {
 
 	private Transform target;
 	private int wavepointIndex = 0;
-
 	private float slowCountdown = 0f;
 	public float slowTime = 2f;
-
 	private Enemy enemy;
+	private AudioManager audioManager;
 
 	void Start () {
+		audioManager = GameObject.Find ("MASTER").GetComponent<AudioManager> ();
 		enemy = GetComponent<Enemy> ();
 		target = Waypoints.targets [0];
 	}
@@ -29,6 +29,7 @@ public class EnemyMovement : MonoBehaviour {
 	}
 
 	void ReachLastWaypoint () {
+		audioManager.PlayFailSound ();
 		PlayerStats.SubHearts (1);
 		Destroy (gameObject);
 	}

@@ -25,14 +25,12 @@ public class PlayerStats : MonoBehaviour {
 	public static int blueDiasToUse;
 	public static int greenDiasToUse;
 	public static int redDiasToUse;
-
 	public Text blueDiaText;
 	public Text greenDiaText;
 	public Text RedDiaText;
 	public static Text _blueDiaText;
 	public static Text _greenDiaText;
 	public static Text _redDiaText;
-
 	public static bool sound = true;
 	public static bool music = true;
 

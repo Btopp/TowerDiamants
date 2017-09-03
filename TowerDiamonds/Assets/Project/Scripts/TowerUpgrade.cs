@@ -12,21 +12,12 @@ public class TowerUpgrade : MonoBehaviour {
 	public Diamond slotTwoDia;
 	[HideInInspector]
 	public Diamond slotThreeDia;
-
 	[HideInInspector]
 	public Sprite slotOneSprite;
 	[HideInInspector]
 	public Sprite slotTwoSprite;
 	[HideInInspector]
 	public Sprite slotThreeSprite;
-
-	private UIManager uIManager;
-	private UpgradeManager upgradeManager;
-
-	void Start(){
-		uIManager = (UIManager) GameObject.Find("UIManager").GetComponent<UIManager> ();
-		upgradeManager = (UpgradeManager) GameObject.Find("UpgradeManager").GetComponent<UpgradeManager> ();
-	}
 
 	public void SetSlotOneSprite (Sprite sprite) {
 		slotOneSprite = sprite;	

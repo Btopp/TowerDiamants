@@ -8,14 +8,17 @@ public class MainMenu : MonoBehaviour {
 
 	public void ChooseTutorial () {
 		SceneManager.LoadScene (1);
+		Time.timeScale = 1.0f;
 	}		
 
 	public void ChooseKampagne () {
 		SceneManager.LoadScene (1);
+		Time.timeScale = 1.0f;
 	}
 
 	public void ChooseEndless () {
 		SceneManager.LoadScene (2);
+		Time.timeScale = 1.0f;
 	}
 
 	public void ChooseSound () {

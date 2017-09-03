@@ -39,27 +39,10 @@ public class Socket : MonoBehaviour {
 		}
 	}
 		
-	//FUER SP DISABLED
-//	void OnMouseEnter () {
-//		if(EventSystem.current.IsPointerOverGameObject ()){
-//			return;
-//		}
-//
-//		rend.material.color = hoverColor;
-//	}
-
-	//TEST
 	void OnMouseExit () {
-//		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-//		if (Physics.Raycast(ray, out hit)) {
-//			if(hit.collider.name == "Upgrade"){
-//				Debug.Log (hit.collider.name);
-//				return;
-//			}
-//		}
-//		if (upgradeManager.enabled) {
-//			return;
-//		}
+		if(EventSystem.current.IsPointerOverGameObject ()){
+			return;
+		}
 		SetIdolColor ();
 	}
 
@@ -72,16 +55,12 @@ public class Socket : MonoBehaviour {
 	}
 
 	void OnMouseDown () {
-//		if (EventSystem.current.IsPointerOverGameObject ()) {
-//			return;
-//		}
 		if (uIManager.selectedSocket != null) {
 			uIManager.selectedSocket.SetIdolColor ();
 			if (uIManager.selectedSocket.tower != null) {
 				uIManager.selectedSocket.tower.GetComponent<Tower> ().SetRangeIndicatorOff ();
 			}
 		}
-
 		rend.material.color = hoverColor;
 		buildManager.SelectSocketToBuildOn (this);
 		uIManager.SetSelectedSocket (this);

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Project/Scenes/MapTutorial.unity
+- path: Assets/Project/Scenes/MapEndless.unity
   isLoaded: 1
   isActive: 1

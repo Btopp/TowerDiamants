@@ -7,23 +7,20 @@ public class Tower : MonoBehaviour {
 
 	[Header ("General")]
 	public float startRange = 8f;
-	[HideInInspector]
-	public float range;
 	public int slowPercent = 0;
 	public GameObject rangeIndicator;
-
 	public string enemyTag = "Enemy";
-	private Transform target;
-	private Enemy targetEnemy;
-
 	public Transform partToRotate;
 	public float turnSpeed = 10f;
-
 	public Transform firePoint;
-
 	public AudioClip shotSound;
 	private AudioManager audioManager;
-
+	[HideInInspector]
+	public float range;
+	[HideInInspector]
+	public int sellValue;
+	private Transform target;
+	private Enemy targetEnemy;
 	[Header ("Use Projectiles")]
 	public GameObject projectilePrefab;
 	public float fireRate = 1f;
@@ -31,7 +28,6 @@ public class Tower : MonoBehaviour {
 	public float startProjectileDamage = 1f;
 	[HideInInspector]
 	public float projectileDamage = 0f;
-
 	[Header ("Use Laser")]
 	public bool useLaser = false;
 	public LineRenderer lineRenderer;
@@ -39,9 +35,6 @@ public class Tower : MonoBehaviour {
 	public float startDamagePerSec = 0f;
 	[HideInInspector]
 	public float damagePerSec = 0f;
-
-	[HideInInspector]
-	public int sellValue;
 
 	void Start () {
 		damagePerSec = startDamagePerSec;
@@ -101,8 +94,6 @@ public class Tower : MonoBehaviour {
 
 	}
 
-	//todo: ingame Rangeindicator
-
 	void OnDrawGizmosSelected () {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, range);
@@ -119,8 +110,7 @@ public class Tower : MonoBehaviour {
 				nearestEnemy = enemy;
 			}
 		}
-		////Wert wurde um 1.1f korrigiert damit die Tower korrekt schiessen
-		if (nearestEnemy != null && shortestDistance <= range * 1.0f) {
+		if (nearestEnemy != null && shortestDistance <= range) {
 			target = nearestEnemy.transform;
 			targetEnemy = nearestEnemy.GetComponent<Enemy> ();
 		} else {

@@ -22,11 +22,6 @@ public class UpgradeManager : MonoBehaviour {
 	public Sprite diaGreen;
 	public Sprite diaRed;
 
-//	private Sprite selectedDiaSprite;
-
-	//neu
-//	private Diamond selectedDia;
-
 	private GameObject selectedTower;
 
 	private UIManager uIManager;
@@ -58,7 +53,6 @@ public class UpgradeManager : MonoBehaviour {
 
 	public void SelectDiamondBlue () {
 		if (selectedSlotImage.sprite != diaDefault) {
-			//Vorerst. todo: Soll den richtigen Dia austauschen
 			Debug.Log ("Socket is used");	
 		} else {
 			if (PlayerStats.blueDiasToUse <= 0) {
@@ -75,7 +69,6 @@ public class UpgradeManager : MonoBehaviour {
 
 	public void SelectDiamondGreen () {
 		if (selectedSlotImage.sprite != diaDefault) {
-			//Vorerst. todo: Soll den richtigen Dia austauschen
 			Debug.Log ("Socket is used");	
 		} else {
 			if (PlayerStats.greenDiasToUse <= 0) {
@@ -92,7 +85,6 @@ public class UpgradeManager : MonoBehaviour {
 
 	public void SelectDiamondRed () {
 		if (selectedSlotImage.sprite != diaDefault) {
-			//Vorerst. todo: Soll den richtigen Dia austauschen
 			Debug.Log ("Socket is used");	
 		} else {
 			if (PlayerStats.redDiasToUse <= 0) {
@@ -120,13 +112,11 @@ public class UpgradeManager : MonoBehaviour {
 		} else {
 			slotOneImage.sprite = diaDefault;
 		}
-
 		if (towerSlot2Sprite != null) {
 			slotTwoImage.sprite = towerSlot2Sprite;
 		} else {
 			slotTwoImage.sprite = diaDefault;
 		}
-
 		if (towerSlot3Sprite != null) {
 			slotThreeImage.sprite = towerSlot3Sprite;
 		} else {
@@ -141,8 +131,7 @@ public class UpgradeManager : MonoBehaviour {
 	public void UpdateSlotSprite () {
 		selectedSlotImage = selectedSlot.GetComponent<Image> ();
 	}
-
-	// todo: Towerdelete
+		
 	public void DeleteSelectedTower () {
 		PlayerStats.AddEnergy ((int) Mathf.Floor (0.6f * selectedTower.GetComponent<Tower>().sellValue));
 		Destroy (selectedTower);

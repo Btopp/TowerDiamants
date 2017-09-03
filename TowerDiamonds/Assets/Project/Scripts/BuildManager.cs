@@ -42,14 +42,6 @@ public class BuildManager : MonoBehaviour {
 	}
 		
 	public void BuildTower () {
-
-		//Ist nicht mehr noetig
-//		if (socketToBuildOn.gotTower) {
-//			toastMessageScript.showToastOnUiThread ("Socket blocked!");
-//			Debug.Log ("Socket blocked");
-//			return;
-//		}
-
 		if (PlayerStats.energy < towerToBuild.cost) {
 			toastMessageScript.showToastOnUiThread ("Not enough ENERGY!");
 			Debug.Log ("Not enough energy");

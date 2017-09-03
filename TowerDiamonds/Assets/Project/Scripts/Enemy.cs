@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
 
-	//Enemy Stats
 	[HideInInspector]
 	public float hitPoints;
 	public float startHitPoints = 1.0f;
@@ -14,7 +13,6 @@ public class Enemy : MonoBehaviour {
 	public float speed;
 	public float startSpeed = 5.0f;
 	public int energyBonus = 15;
-
 	public GameObject deathEffect;
 	private AudioManager audioManager;
 

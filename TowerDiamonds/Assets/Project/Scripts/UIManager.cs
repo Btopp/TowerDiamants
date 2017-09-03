@@ -9,12 +9,12 @@ public class UIManager : MonoBehaviour {
 	
 	[HideInInspector]
 	public Socket selectedSocket;
-
 	public Transform towerShop;
 	public Transform towerDetails;
 	public Transform towerDias;
 	public Transform overallDias;
-
+	public Transform gameOver;
+	public Transform complete;
 	public GameObject pauseButton;
 	private Image pauseButtonImage;
 	private Sprite pauseSprite;
@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour {
 		pauseButtonImage = pauseButton.GetComponent<Image> ();
 		pauseSprite = pauseButtonImage.sprite;	
 	}
-
 
 	public void DisableUI () {
 		towerShop.gameObject.SetActive (false);
@@ -67,5 +66,9 @@ public class UIManager : MonoBehaviour {
 
 	public void SetSelectedSocket (Socket socket) {
 		selectedSocket = socket;
+	}
+
+	public void EnableComplete () {
+		complete.gameObject.SetActive (true);
 	}
 }
