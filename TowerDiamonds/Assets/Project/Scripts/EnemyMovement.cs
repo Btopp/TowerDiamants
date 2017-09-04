@@ -12,8 +12,10 @@ public class EnemyMovement : MonoBehaviour {
 	public float slowTime = 2f;
 	private Enemy enemy;
 	private AudioManager audioManager;
+	private UIManager uIManager;
 
 	void Start () {
+		uIManager = (UIManager)GameObject.Find ("UIManager").GetComponent<UIManager> ();
 		audioManager = GameObject.Find ("MASTER").GetComponent<AudioManager> ();
 		enemy = GetComponent<Enemy> ();
 		target = Waypoints.targets [0];
@@ -30,6 +32,10 @@ public class EnemyMovement : MonoBehaviour {
 
 	void ReachLastWaypoint () {
 		audioManager.PlayFailSound ();
+		if (PlayerStats.hearts <= 1) {
+			uIManager.EnableGameOver ();
+			Time.timeScale = 0f;
+		}
 		PlayerStats.SubHearts (1);
 		Destroy (gameObject);
 	}

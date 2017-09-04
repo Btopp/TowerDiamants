@@ -16,9 +16,11 @@ public class UIManager : MonoBehaviour {
 	public Transform gameOver;
 	public Transform complete;
 	public GameObject pauseButton;
+	public GameObject speedUpButton;
 	private Image pauseButtonImage;
 	private Sprite pauseSprite;
 	public Sprite playSprite;
+	private bool gameOverOn = false;
 
 	void Start () {	
 		pauseButtonImage = pauseButton.GetComponent<Image> ();
@@ -38,11 +40,17 @@ public class UIManager : MonoBehaviour {
 
 	public void EnableTowerShop () {
 		DisableUI ();
+		if (gameOverOn) {
+			return;
+		}
 		towerShop.gameObject.SetActive (true);
 	}
 
 	public void EnableTowerDetails () {
 		DisableUI ();
+		if (gameOverOn) {
+			return;
+		}
 		towerDetails.gameObject.SetActive (true);
 	}
 
@@ -69,6 +77,17 @@ public class UIManager : MonoBehaviour {
 	}
 
 	public void EnableComplete () {
+		DisableUI ();
 		complete.gameObject.SetActive (true);
+		pauseButton.gameObject.SetActive (false);
+		gameOverOn = true;
+	}
+
+	public void EnableGameOver () {
+		DisableUI ();
+		gameOver.gameObject.SetActive (true);
+		pauseButton.gameObject.SetActive (false);
+		speedUpButton.gameObject.SetActive (false);
+		gameOverOn = true;
 	}
 }

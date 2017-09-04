@@ -22,6 +22,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void ChooseSound () {
+		//Music on/off
 		//Sound on/off
 		if (PlayerStats.sound) {
 			PlayerStats.sound = false;
@@ -31,7 +32,6 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void ChooseMusic () {
-		//Music on/off
 		//Sound on/off
 		if (PlayerStats.music) {
 			PlayerStats.music = false;

@@ -34,10 +34,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void SpeeUp () {	
-		Time.timeScale = 2f;	
+		Time.timeScale = 1.5f;	
 	}
 
 	public void PressSpeedUpButton () {
+		if (Time.timeScale == 0f) {
+			return;
+		}
 		if (speedUpButtonPressed) {
 			StartGame ();
 			speedUpButtonPressed = false;
