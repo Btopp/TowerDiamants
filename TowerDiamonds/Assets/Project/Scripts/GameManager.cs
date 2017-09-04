@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PressPauseButton () {
+		speedUpButtonPressed = false;
 		if (pauseButtonPressed) {
 			StartGame ();
 			pauseButtonPressed = false;
