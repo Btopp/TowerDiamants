@@ -19,6 +19,9 @@ public class PlayerStats : MonoBehaviour {
 	public static Text _energyText;
 	public static Text _heartsText;
 
+	public GameObject energyBonusText;
+	public static GameObject _energyBonusText;
+
 	public int blueDiamonds = 0;
 	public int greenDiamonds = 0;
 	public int redDiamonds = 0;
@@ -34,9 +37,13 @@ public class PlayerStats : MonoBehaviour {
 	public static bool sound = true;
 	public static bool music = true;
 
+	//muss ausgelagert werden
+	public static float timerForBonusText = 0.0f;
+
 	void Start () {
 		_energyText = energyText;
 		_heartsText = heartsText;
+		_energyBonusText = energyBonusText;
 		energy = startEngergy;
 		hearts = startHearts;
 		blueDiasToUse = blueDiamonds;
@@ -78,6 +85,14 @@ public class PlayerStats : MonoBehaviour {
 		energy += amount;
 		UpdateEnergyText ();
 	}
+
+	public static void AddEnergyBonus () {
+		_energyBonusText.SetActive (true);
+		timerForBonusText = 5f;
+		int energyBonus = (int) Mathf.Round(energy * 0.1f);
+		energy += energyBonus;
+		UpdateEnergyText ();
+	}
 		
 	public static void AddHearts (int amount) {
 		hearts += amount;
@@ -110,5 +125,18 @@ public class PlayerStats : MonoBehaviour {
 			redDiasToUse += amount;
 		}
 		UpdateDiamondText ();
+	}
+
+	//muss ausgelagert werden
+	void Update () {
+		//timer for energybonustext
+		if (timerForBonusText <= 0) {
+			if (!(_energyBonusText.activeSelf)){
+				return;
+			}
+			_energyBonusText.SetActive (false);
+		} else {
+			timerForBonusText -= Time.deltaTime;
+		}	
 	}
 }

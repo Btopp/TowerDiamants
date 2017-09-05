@@ -16,8 +16,13 @@ public class MainMenu : MonoBehaviour {
 		Time.timeScale = 1.0f;
 	}
 
-	public void ChooseEndless () {
+	public void ChooseEndlessMap1 () {
 		SceneManager.LoadScene (2);
+		Time.timeScale = 1.0f;
+	}
+
+	public void ChooseEndlessMap2 () {
+		SceneManager.LoadScene (3);
 		Time.timeScale = 1.0f;
 	}
 

@@ -29,6 +29,9 @@ public class WaveSpawnerEndless : MonoBehaviour {
 	private int diaBonusAmount = 1;
 	private ToastMessageScript toastMessageScript;
 
+	//neu
+	private bool bossWas = false;
+
 	void Start () {
 		toastMessageScript = GameObject.Find ("MASTER").GetComponent<ToastMessageScript> ();
 	}
@@ -36,7 +39,10 @@ public class WaveSpawnerEndless : MonoBehaviour {
 	IEnumerator SpawnWave () {
 		waveIndexText.text = (waveIndex + 1).ToString ();
 		waveIndex++;
+		//Money Bonus 10%
+		PlayerStats.AddEnergyBonus ();
 		if (waveIndex % bossIntervall == 0) {
+			bossWas = true;
 			randomizer = (int) Mathf.Round (Random.Range (0.6f, 3.4f));
 			diaBonusAmount += 1;
 			toastMessageScript.showToastOnUiThread ("You received " + Mathf.Floor(diaBonusAmount / 2) +" Diamond(s)!");
@@ -61,6 +67,10 @@ public class WaveSpawnerEndless : MonoBehaviour {
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
 		} else {
+			if (bossWas) {
+				//do things after boss
+				bossWas = false;
+			}
 			bossTimeOffset = 0f;
 			for (int i = 0; i < waveIndex; i++) {
 //				SpawnEnemy (enemySPrefab, waveIndex * 1.5f);

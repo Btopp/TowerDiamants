@@ -33,7 +33,8 @@ public class WaveSpawnerTutorial : MonoBehaviour {
 		if (waveIndex == 3) {
 			uIManager.EnableComplete ();
 			Time.timeScale = 0f;
-			yield return new WaitForSeconds(5f);
+			toastMessageScript.showToastOnUiThread ("Go back and play the Endlessmode! And remember: 'You get 10% bonus Energy every wave!'");
+			yield return new WaitForSeconds(10f);
 		}
 		if (waveIndex == 2) {
 			SpawnEnemy (enemySBBPrefab, (-0.5f));
