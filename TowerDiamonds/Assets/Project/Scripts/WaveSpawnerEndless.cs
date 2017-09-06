@@ -43,7 +43,7 @@ public class WaveSpawnerEndless : MonoBehaviour {
 		PlayerStats.AddEnergyBonus ();
 		if (waveIndex % bossIntervall == 0) {
 			bossWas = true;
-			randomizer = (int) Mathf.Round (Random.Range (0.6f, 3.4f));
+			randomizer = (int) Mathf.Round (Random.Range (0.51f, 3.49f));
 			diaBonusAmount += 1;
 			toastMessageScript.showToastOnUiThread ("You received " + Mathf.Floor(diaBonusAmount / 2) +" Diamond(s)!");
 			bossTimeOffset = (timeBetweenEnemys / 2) * waveIndex;
@@ -53,15 +53,15 @@ public class WaveSpawnerEndless : MonoBehaviour {
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {
 				if (randomizer == 1) {
 //					SpawnEnemy (enemySBBPrefab, (waveIndex - 1) * 3.0f);
-					SpawnEnemy (enemySBBPrefab, (waveIndex / bossIntervall) * enemyScaling);
+					SpawnEnemy (enemySBBPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.7f);
 				}
 				if (randomizer == 2) {
 //					SpawnEnemy (enemySBGPrefab, (waveIndex - 1) * 3.0f);
-					SpawnEnemy (enemySBGPrefab, (waveIndex / bossIntervall) * enemyScaling);
+					SpawnEnemy (enemySBGPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.8f);
 				}
 				if (randomizer == 3) {
 //					SpawnEnemy (enemySBRPrefab, (waveIndex - 1) * 3.0f);
-					SpawnEnemy (enemySBRPrefab, (waveIndex / bossIntervall) * enemyScaling);
+					SpawnEnemy (enemySBRPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.9f);
 				}
 				enemyScaling += 1;
 				yield return new WaitForSeconds (timeBetweenEnemys);
