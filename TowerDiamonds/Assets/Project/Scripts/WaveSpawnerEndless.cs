@@ -54,13 +54,13 @@ public class WaveSpawnerEndless : MonoBehaviour {
 			}
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {
 				if (randomizer == 1) {
-					SpawnEnemy (enemySBBPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.7f);
+					SpawnEnemy (enemySBBPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.5f);
 				}
 				if (randomizer == 2) {
-					SpawnEnemy (enemySBGPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.8f);
+					SpawnEnemy (enemySBGPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.625f);
 				}
 				if (randomizer == 3) {
-					SpawnEnemy (enemySBRPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.9f);
+					SpawnEnemy (enemySBRPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.75f);
 				}
 				enemyScaling += 1;
 				yield return new WaitForSeconds (timeBetweenEnemys);
@@ -68,6 +68,9 @@ public class WaveSpawnerEndless : MonoBehaviour {
 		} else {
 			if (bossWas) {
 				//do things after boss
+				randomizer = (int) Mathf.Round (Random.Range (0.51f, 3.49f));
+				GiveDiamonds();
+				toastMessageScript.showToastOnUiThread ("You received a Diamond!");
 				bossWas = false;
 			}
 			bossTimeOffset = 0f;
