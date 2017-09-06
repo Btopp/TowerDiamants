@@ -40,7 +40,9 @@ public class WaveSpawnerEndless : MonoBehaviour {
 		waveIndexText.text = (waveIndex + 1).ToString ();
 		waveIndex++;
 		//Money Bonus 10%
-		PlayerStats.AddEnergyBonus ();
+		if (waveIndex > 1) {
+			PlayerStats.AddEnergyBonus ();
+		}
 		if (waveIndex % bossIntervall == 0) {
 			bossWas = true;
 			randomizer = (int) Mathf.Round (Random.Range (0.51f, 3.49f));
@@ -52,15 +54,12 @@ public class WaveSpawnerEndless : MonoBehaviour {
 			}
 			for (int i = 0; i < waveIndex / bossIntervall; i++) {
 				if (randomizer == 1) {
-//					SpawnEnemy (enemySBBPrefab, (waveIndex - 1) * 3.0f);
 					SpawnEnemy (enemySBBPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.7f);
 				}
 				if (randomizer == 2) {
-//					SpawnEnemy (enemySBGPrefab, (waveIndex - 1) * 3.0f);
 					SpawnEnemy (enemySBGPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.8f);
 				}
 				if (randomizer == 3) {
-//					SpawnEnemy (enemySBRPrefab, (waveIndex - 1) * 3.0f);
 					SpawnEnemy (enemySBRPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.9f);
 				}
 				enemyScaling += 1;
@@ -73,7 +72,6 @@ public class WaveSpawnerEndless : MonoBehaviour {
 			}
 			bossTimeOffset = 0f;
 			for (int i = 0; i < waveIndex; i++) {
-//				SpawnEnemy (enemySPrefab, waveIndex * 1.5f);
 				SpawnEnemy (enemySPrefab, enemyScaling);
 				yield return new WaitForSeconds (timeBetweenEnemys);
 			}
