@@ -133,8 +133,8 @@ public class Tower : MonoBehaviour {
 	}
 
 	public void SetDamage () {
-		projectileDamage *= 1.6f;
-		damagePerSec *= 1.6f;
+		projectileDamage *= 1.5f;
+		damagePerSec *= 1.5f;
 	}
 
 	public void SetRangeIndicatorOn () {
