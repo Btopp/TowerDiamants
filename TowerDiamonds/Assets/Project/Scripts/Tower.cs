@@ -7,7 +7,6 @@ public class Tower : MonoBehaviour {
 
 	[Header ("General")]
 	public float startRange = 8f;
-	[HideInInspector]
 	//+100 for % correction
 	public float slowPercent = 100;
 	public GameObject rangeIndicator;

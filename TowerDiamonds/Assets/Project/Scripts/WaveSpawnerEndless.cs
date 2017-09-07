@@ -49,7 +49,7 @@ public class WaveSpawnerEndless : MonoBehaviour {
 			diaBonusAmount += 1;
 			toastMessageScript.showToastOnUiThread ("You received " + Mathf.Floor(diaBonusAmount / 2) +" Diamond(s)!");
 			//bossTimeOffset folgt keiner sinnvollen logik aber passt
-			bossTimeOffset = ((timeBetweenEnemys / 2) * waveIndex) - ((timeBetweenEnemys * 1.2f) * (waveIndex / bossIntervall));
+			bossTimeOffset = ((timeBetweenEnemys / 2) * waveIndex) - ((timeBetweenEnemys * 1.5f) * (waveIndex / bossIntervall));
 			for (int i = 0; i < Mathf.Floor(diaBonusAmount / 2); i++) {
 				GiveDiamonds ();
 			}
@@ -64,7 +64,7 @@ public class WaveSpawnerEndless : MonoBehaviour {
 					SpawnEnemy (enemySBRPrefab, (waveIndex / bossIntervall) * enemyScaling * 0.75f);
 				}
 				enemyScaling += 1;
-				yield return new WaitForSeconds (timeBetweenEnemys * 1.2f);
+				yield return new WaitForSeconds (timeBetweenEnemys * 1.5f);
 			}
 		} else {
 			if (bossWas) {
