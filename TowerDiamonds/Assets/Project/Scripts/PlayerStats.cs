@@ -89,7 +89,7 @@ public class PlayerStats : MonoBehaviour {
 	public static void AddEnergyBonus () {
 		_energyBonusText.SetActive (true);
 		timerForBonusText = 3.0f;
-		int energyBonus = (int) Mathf.Round(energy * 0.1f);
+		int energyBonus = (int) Mathf.Round(energy * 0.05f);
 		energy += energyBonus;
 		UpdateEnergyText ();
 	}

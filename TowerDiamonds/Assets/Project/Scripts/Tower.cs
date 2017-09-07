@@ -7,7 +7,9 @@ public class Tower : MonoBehaviour {
 
 	[Header ("General")]
 	public float startRange = 8f;
-	public int slowPercent = 0;
+	[HideInInspector]
+	//+100 for % correction
+	public float slowPercent = 100;
 	public GameObject rangeIndicator;
 	public string enemyTag = "Enemy";
 	public Transform partToRotate;
@@ -58,7 +60,7 @@ public class Tower : MonoBehaviour {
 		Projectile projectile = projectileGO.GetComponent<Projectile> ();
 		if (projectile != null) {
 			projectile.damage = projectileDamage;
-			projectile.slowPercent = slowPercent;
+			projectile.slowPercent = slowPercent - 100;
 			projectile.Seek (target);
 		}
 	}
@@ -73,9 +75,9 @@ public class Tower : MonoBehaviour {
 	void Laser () {
 		targetEnemy.SubHitPoints (damagePerSec * Time.deltaTime);
 
-		if (slowPercent > 0) {
+		if (slowPercent > 100f) {
 		
-			targetEnemy.Slow (slowPercent);
+			targetEnemy.Slow (slowPercent - 100f);
 		
 		}
 
@@ -119,22 +121,21 @@ public class Tower : MonoBehaviour {
 	}
 
 	public void SetSlow () {
-		slowPercent += 30;
+		if (slowPercent == 100f) {
+			slowPercent += 25f;
+		} else {
+			slowPercent *= 1.25f;
+		}
 	}
 
 	public void SetRange () {
-		//+20%
-//		range += startRange * 0.2f;
-		//*20%
 		range *= 1.15f;
 		rangeIndicator.transform.localScale *= 1.15f;
 	}
 
 	public void SetDamage () {
-//		projectileDamage += startProjectileDamage * 0.5f;
-//		damagePerSec += startDamagePerSec * 0.5f;
-		projectileDamage *= 1.5f;
-		damagePerSec *= 1.5f;
+		projectileDamage *= 1.6f;
+		damagePerSec *= 1.6f;
 	}
 
 	public void SetRangeIndicatorOn () {

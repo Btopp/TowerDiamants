@@ -19,17 +19,17 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	public void PlayDeathSound () {
-		audioSource.PlayOneShot (deathSound, Random.Range(0.6f, 0.62f));
+		audioSource.PlayOneShot (deathSound, Random.Range(0.59f, 0.6f));
 	}
 
 	public void PlayShotSound (AudioClip sound) {
-		audioSource.PlayOneShot (sound, Random.Range(0.98f, 1.0f));
+		audioSource.PlayOneShot (sound, Random.Range(0.98f, 0.99f));
 	}
 
 	public void PlaySpawnSound () {
 	}
 
 	public void PlayFailSound () {
-		audioSource.PlayOneShot (failSound, Random.Range (0.33f, 0.35f));
+		audioSource.PlayOneShot (failSound, Random.Range (0.3f, 0.31f));
 	}
 }

@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour {
 	[HideInInspector]
 	public bool speedUpButtonPressed = false;
 
+	private UIManager uIManager;
+
+	void Start () {
+		uIManager = (UIManager) GameObject.Find("UIManager").GetComponent<UIManager> ();
+	}
+
 	public void BackToMainMenu () {
 		SceneManager.LoadScene (0);
 	}
@@ -24,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void PressPauseButton () {
+		uIManager.DisableSpeedUpAnimation ();
 		speedUpButtonPressed = false;
 		if (pauseButtonPressed) {
 			StartGame ();
@@ -43,9 +50,11 @@ public class GameManager : MonoBehaviour {
 			return;
 		}
 		if (speedUpButtonPressed) {
+			uIManager.DisableSpeedUpAnimation ();
 			StartGame ();
 			speedUpButtonPressed = false;
 		} else {
+			uIManager.EnableSpeedUpAnimation ();
 			SpeeUp ();
 			speedUpButtonPressed = true;
 		}	

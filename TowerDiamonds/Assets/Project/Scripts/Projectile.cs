@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour {
 	public float damage = 1f;
 	public GameObject impactEffekt;
 	[HideInInspector]
-	public int slowPercent = 0;
+	public float slowPercent = 0f;
 
 	public void Seek (Transform _target) {
 		target = _target;

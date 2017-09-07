@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour {
 	public Transform complete;
 	public GameObject pauseButton;
 	public GameObject speedUpButton;
+	[HideInInspector]
+	public Animator speedUpAnimator;
 	private Image pauseButtonImage;
 	private Sprite pauseSprite;
 	public Sprite playSprite;
@@ -24,7 +26,8 @@ public class UIManager : MonoBehaviour {
 
 	void Start () {	
 		pauseButtonImage = pauseButton.GetComponent<Image> ();
-		pauseSprite = pauseButtonImage.sprite;	
+		pauseSprite = pauseButtonImage.sprite;
+		speedUpAnimator = speedUpButton.GetComponent<Animator> ();
 	}
 
 	public void DisableUI () {
@@ -74,6 +77,14 @@ public class UIManager : MonoBehaviour {
 
 	public void SetSelectedSocket (Socket socket) {
 		selectedSocket = socket;
+	}
+
+	public void EnableSpeedUpAnimation () {
+			speedUpAnimator.enabled = true;
+	}
+
+	public void DisableSpeedUpAnimation () {
+			speedUpAnimator.enabled = false;
 	}
 
 	public void EnableComplete () {

@@ -26,6 +26,11 @@ public class MainMenu : MonoBehaviour {
 		Time.timeScale = 1.0f;
 	}
 
+	public void ChooseEndlessMap3 () {
+		SceneManager.LoadScene (4);
+		Time.timeScale = 1.0f;
+	}
+
 	public void ChooseSound () {
 		//Music on/off
 		//Sound on/off
